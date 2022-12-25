@@ -1,11 +1,9 @@
-import { compareDates } from '../../../utils';
-
 type TaskProps = {
   id: number;
   title: string;
   type: string;
   description: string;
-  dueDate: Date;
+  expirationDate: Date;
 };
 
 export class Task {
@@ -13,7 +11,7 @@ export class Task {
   private title: string;
   private type: string;
   private description: string;
-  private dueDate: Date;
+  private expirationDate: Date;
 
   constructor(props: TaskProps) {
     if (props.title.length > 30) {
@@ -24,13 +22,21 @@ export class Task {
       throw new Error();
     }
 
-    // const dueDate = props.dueDate.setHours(3, 0, 0, 0);
-
+    //Get current date and format to reset time to 0
     const currentDate = new Date();
+    const formattedCurrentDate = new Date(
+      `${currentDate.getFullYear()}-${
+        currentDate.getMonth() + 1
+      }-${currentDate.getDate()}`
+    );
 
-    console.log(compareDates(currentDate, props.dueDate));
+    const isDueDateSameCurrentDate =
+      formattedCurrentDate.getTime() === props.expirationDate.getTime();
 
-    if (compareDates(currentDate, props.dueDate)) {
+    const isDueDateBeforeCurrent =
+      formattedCurrentDate.getTime() > props.expirationDate.getTime();
+
+    if (isDueDateSameCurrentDate || isDueDateBeforeCurrent) {
       throw new Error();
     }
 
@@ -38,6 +44,6 @@ export class Task {
     this.title = props.title;
     this.type = props.type;
     this.description = props.description;
-    this.dueDate = props.dueDate;
+    this.expirationDate = props.expirationDate;
   }
 }
