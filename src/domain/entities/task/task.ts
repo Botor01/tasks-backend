@@ -1,3 +1,5 @@
+import { getCurrentDate } from '../../../utils';
+
 type TaskProps = {
   id: number;
   title: string;
@@ -23,18 +25,13 @@ export class Task {
     }
 
     //Get current date and format to reset time to 0
-    const currentDate = new Date();
-    const formattedCurrentDate = new Date(
-      `${currentDate.getFullYear()}-${
-        currentDate.getMonth() + 1
-      }-${currentDate.getDate()}`
-    );
+    const currentDate = getCurrentDate();
 
     const isDueDateSameCurrentDate =
-      formattedCurrentDate.getTime() === props.expirationDate.getTime();
+      currentDate.getTime() === props.expirationDate.getTime();
 
     const isDueDateBeforeCurrent =
-      formattedCurrentDate.getTime() > props.expirationDate.getTime();
+      currentDate.getTime() > props.expirationDate.getTime();
 
     if (isDueDateSameCurrentDate || isDueDateBeforeCurrent) {
       throw new Error();

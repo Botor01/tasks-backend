@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Task } from './task';
-import { getFutureDate } from '../../../utils';
+import { getCurrentDate, getFutureDate } from '../../../utils';
 
 describe('task entity', () => {
   it('should throw an error if the title have more of 30 characters', () => {
@@ -45,7 +45,7 @@ describe('task entity', () => {
         title: 'Test Title',
         type: 'Test',
         description: 'Description Test',
-        expirationDate: new Date('2022-12-25'),
+        expirationDate: getCurrentDate(),
       });
     }).toThrow();
   });
