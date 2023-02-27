@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Task } from '../../entities/task/task';
-import { DeleteTaskByIdUseCase } from './delete-task-by-id';
+import { DeleteTaskByIdUseCase } from './delete-task-by-id-use-case';
 import {
   IDeleteTaskByIdRepository,
   IFetchTaskByIdRepository,
