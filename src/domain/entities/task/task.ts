@@ -43,4 +43,8 @@ export class Task {
     this.description = props.description;
     this.expirationDate = props.expirationDate;
   }
+
+  get getId(): number {
+    return this.id;
+  }
 }
